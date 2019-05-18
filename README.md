@@ -17,3 +17,6 @@ Nothing for now
 ### Coding Standard
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+
+CI: Drone
+http://212.64.27.71:9000/
