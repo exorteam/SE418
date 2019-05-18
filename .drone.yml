@@ -1,0 +1,14 @@
+kind: pipeline
+name: drone_test
+
+steps:
+- name: test
+  image: maven:latest
+  commands:
+  - mvn clean test
+  volumes:
+  - name: ci-test
+    path: /ci
+  when:
+    event:
+    - push
