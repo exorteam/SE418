@@ -5,6 +5,7 @@ steps:
 - name: test
   image: maven:latest
   commands:
+  - cd demo
   - mvn clean test
   volumes:
   - name: ci-test
