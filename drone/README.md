@@ -6,7 +6,9 @@
 2. Install Docker on your server, run
 
 	`sudo apt update`
+	
 	`sudo apt install docker.io`
+	
 	`sudo apt install docker-compose`
 	
 3. Install Drone on your server, run
@@ -16,7 +18,7 @@
 4. Create a OAuth App with your Github Account
 4. Write a docker-compose.yaml for Drone
 
-	(```)
+	```
 		version: "2"
 		services:
 		  drone-server:
@@ -36,7 +38,7 @@
 			  - DRONE_SERVER_HOST=
 			  - DRONE_SERVER_PROTO=http
 			  - DRONE_REPOSITORY_FILTER=
-	(```)
+	```
 	
 5. Run Drone
 
@@ -44,7 +46,7 @@
 	
 6. Activate certain repository and write a **.drone.yml** in that repository
 
-	(```)
+	```
 		kind: pipeline
 		name: drone_test
 
@@ -60,7 +62,7 @@
 		  when:
 			event:
 			- push
-	(```)
+	```
 
 ## Screen shots
 ![sc1](./img/screenshot1.png)
