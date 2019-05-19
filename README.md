@@ -18,5 +18,8 @@ Nothing for now
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
 
-CI: Drone
-http://212.64.27.71/
+### CI: Drone
+
+[Our Drone Server](http://212.64.27.71/)
+
+[Drone Doc](./drone/README.md)
