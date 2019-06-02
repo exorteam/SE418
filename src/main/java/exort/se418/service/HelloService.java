@@ -10,4 +10,7 @@ import feign.RequestLine;
 public interface HelloService{
 	@RequestLine("GET /hello/{who}")
 	public String hello(@Param("who") String who);
+
+	@RequestLine("GET /ladder/dog/cat")
+	public String ladderDogToCat();
 }
