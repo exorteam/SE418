@@ -6,7 +6,6 @@ steps:
   image: maven:latest
   commands:
   - mvn clean package
-  #- mv /target/se418-0.1.jar ~/
   when:
     event:
     - push
@@ -16,4 +15,5 @@ steps:
   settings:
       repo: se418
       tags: v1
-      dry_run: true
+  script:
+      - /bin/bash ./deploy.sh
