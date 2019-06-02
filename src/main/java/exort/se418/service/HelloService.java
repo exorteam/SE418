@@ -11,6 +11,6 @@ public interface HelloService{
 	@RequestLine("GET /hello/{who}")
 	public String hello(@Param("who") String who);
 
-	@RequestLine("GET /ladder/dog/cat")
-	public String ladderDogToCat();
+	@RequestLine("GET /exorteam/SE418")
+	public String rediectToGithubPage();
 }

@@ -15,6 +15,11 @@ public class HelloController{
 	@Autowired
 	private LadderService ladderService;
 
+	@GetMapping("/")
+	public String homepage(){
+		return "Home Page";
+	}
+
 	@GetMapping("/hello/{who}")
 	public String hello(@PathVariable("who") String who){
 		return "hello "+who;
@@ -30,9 +35,9 @@ public class HelloController{
 		return ladderService.generateLadder(begin,end);
 	}
 
-	@GetMapping("/dog-cat")
+	@GetMapping("/github")
 	public String ladderDogToCat(){
-		return helloService.ladderDogToCat();
+		return helloService.rediectToGithubPage();
 	}
 }
 

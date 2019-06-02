@@ -1,17 +1,16 @@
 kind: pipeline
-name: drone_test
+name: exort_se418
 
 steps:
 - name: build
   image: maven:latest
   commands:
   - mvn clean package
-  volumes:
-  - name: ci-test
-    path: /ci
   when:
     event:
-    - pull-request
     - push
-    branch:
-    - master
+
+- name: deploy
+  image: openjdk:latest
+  commands:
+  - java -jar ./target/se418-0.1.jar
