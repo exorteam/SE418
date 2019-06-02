@@ -10,14 +10,29 @@ steps:
     event:
     - push
 
-- name: deploy
-  image: plugins/docker
+- name: scp
+  image: appleboy/drone-scp
   settings:
-      repo: se418
-      tags: v1
-      dry_run: true
-      
-- name: run
-  image: plugins/docker
-  script:
-      - /bin/bash ./deploy.sh
+    host: 212.64.27.71 
+    target: /exort
+    source:
+    - build
+    - Dockerfile
+    rm: true
+  #when:
+  #  branch:
+  #  - master
+
+- name: ssh
+  image: appleboy/drone-ssh
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    script:
+      - cd /exort
+      - docker build -t exort/se418 .
+      - docker rm -f se418
+      - docker run -d --name se418 -p 8080:8080 exort/se418
+  #when:
+  #  branch:
+  #  - master
