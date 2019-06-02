@@ -17,7 +17,7 @@ steps:
     username: ubuntu
     password: 
         from_secret: server_ci
-    target: /exort
+    target: /root/deploy/${DRONE_REPO}
     source:
     - build
     - Dockerfile
@@ -34,7 +34,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /exort
+      - cd /root/deploy/${DRONE_REPO}
       - docker build -t exort/se418 .
       - docker rm -f se418
       - docker run -d --name se418 -p 8080:8080 exort/se418
