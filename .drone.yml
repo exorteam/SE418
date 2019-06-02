@@ -15,7 +15,8 @@ steps:
   settings:
     host: 212.64.27.71 
     username: ubuntu
-    password: server_ci
+    password: 
+        from_secret: server_ci
     target: /exort
     source:
     - build
@@ -30,7 +31,8 @@ steps:
   settings:
     host: 212.64.27.71 
     username: ubuntu
-    password: server_ci
+    password: 
+        from_secret: server_ci
     script:
       - cd /exort
       - docker build -t exort/se418 .
