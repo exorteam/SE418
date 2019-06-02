@@ -15,5 +15,6 @@ steps:
   settings:
       repo: se418
       tags: v1
+      dry_run: true
   script:
       - /bin/bash ./deploy.sh
