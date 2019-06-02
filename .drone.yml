@@ -6,7 +6,7 @@ steps:
   image: maven:latest
   commands:
   - mvn clean package
-  - mv ./target/se418-0.1.jar ~/
+  - mv /target/se418-0.1.jar ~/
   when:
     event:
     - push
