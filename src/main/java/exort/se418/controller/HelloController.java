@@ -17,8 +17,14 @@ public class HelloController{
 
 	@GetMapping("/hello")
 	public String hello(){
-		logger.info("say hello");
+		logger.info("hello");
 		return "hello";
+	}
+
+	@GetMapping("/sayhello")
+	public String sayHello(){
+		logger.info("say hello");
+		return "say "+helloService.hello();
 	}
 }
 
