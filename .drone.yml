@@ -16,7 +16,6 @@ steps:
     host: 212.64.27.71 
     username: ubuntu
     password:
-      from_secret: Dgy980614
     target: /exort
     source:
     - build
@@ -32,7 +31,6 @@ steps:
     host: 212.64.27.71 
     username: ubuntu
     password:
-      from_secret: Dgy980614
     script:
       - cd /exort
       - docker build -t exort/se418 .
