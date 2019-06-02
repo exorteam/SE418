@@ -19,7 +19,7 @@ steps:
         from_secret: server_ci
     target: /home/ubuntu/deploy/${DRONE_REPO}
     source:
-    - build
+    - target/se418-0.1.jar
     - Dockerfile
     rm: true
   #when:
