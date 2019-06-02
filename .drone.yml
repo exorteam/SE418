@@ -35,6 +35,7 @@ steps:
         from_secret: server_ci
     script:
       - cd /home/ubuntu/deploy/${DRONE_REPO}
+      - ls -a
       - docker build -t exort/se418 .
       - docker rm -f se418
       - docker run -d --name se418 -p 8080:8080 exort/se418
