@@ -1,0 +1,3 @@
+zuul+feign+hystrix+eruka/.idea/
+zuul+feign+hystrix+eruka/calculator/target/
+zuul+feign+hystrix+eruka/gateway/target/
