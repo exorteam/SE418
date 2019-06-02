@@ -11,6 +11,7 @@ steps:
     - push
 
 - name: deploy
+  image: plugins/docker
   commands:
   - docker container kill se418
   - docker container rm se418
