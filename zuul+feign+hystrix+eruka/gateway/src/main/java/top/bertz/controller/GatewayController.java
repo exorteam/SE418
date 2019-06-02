@@ -14,6 +14,11 @@ public class GatewayController {
         return mv;
     }
 
+    @RequestMapping(value = {"/getMessage"}, method = RequestMethod.GET)
+    public String message() {
+        return "Hystrix not Run :(";
+    }
+
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView mv = new ModelAndView("login");
