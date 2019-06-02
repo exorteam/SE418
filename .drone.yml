@@ -12,6 +12,7 @@ steps:
 
 - name: deploy
   image: plugins/docker
-  commands:
-  - docker build -t se418:v1 .
-  - docker run --name=se418 -d -p 9090:8080 se418:v1
+  settings:
+      repo: se418
+      tags: v1
+      dry_run: true
