@@ -11,6 +11,7 @@ steps:
     path: /ci
   when:
     event:
+    - pull-request
     - push
     branch:
     - master
