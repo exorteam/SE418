@@ -13,8 +13,8 @@ steps:
 - name: deploy
   image: plugins/docker
   commands:
-  - docker container kill se418
-  - docker container rm se418
-  - docker image rm se418:v1
-  - docker build -t se418:v1 .
-  - docker run --name=se418 -d -p 9090:8080 se418:v1
+  - sudo docker container kill se418
+  - sudo docker container rm se418
+  - sudo docker image rm se418:v1
+  - sudo docker build -t se418:v1 .
+  - sudo docker run --name=se418 -d -p 9090:8080 se418:v1
