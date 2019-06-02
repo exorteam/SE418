@@ -2,14 +2,15 @@ kind: pipeline
 name: drone_test
 
 steps:
-- name: test
+- name: build
   image: maven:latest
   commands:
-  - cd demo
-  - mvn clean test
+  - mvn clean package
   volumes:
   - name: ci-test
     path: /ci
   when:
     event:
     - push
+    branch:
+    - master
