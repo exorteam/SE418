@@ -16,5 +16,8 @@ steps:
       repo: se418
       tags: v1
       dry_run: true
+      
+- name: run
+  image: plugins/docker
   script:
       - /bin/bash ./deploy.sh
