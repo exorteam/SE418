@@ -9,6 +9,8 @@
 ### Tech Stack
 
 > Vue + Spring Boot + Spring Cloud + Docker + OAuth + ...
+> Continuous integration: Drone
+> Spring Cloud: Feign + Hystrix + Gateway
 
 ### Basic Idea 
 
@@ -23,3 +25,8 @@ Nothing for now
 [Our Drone Server](http://212.64.27.71/)
 
 [Drone Doc](./drone/README.md)
+
+### Project
+
+[Project](http://212.64.27.71:8080/)
+
