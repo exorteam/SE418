@@ -30,5 +30,8 @@ Nothing for now
 
 ### Project
 
-[Project](http://212.64.27.71:8080/)
-[Interface](./src/main/java/exort/se418/controller/HelloController.java)
+The [Production](http://212.64.27.71:8080/) deployed on server.
+
+The [Interfaces](./src/main/java/exort/se418/controller/HelloController.java) of REST API.
+
+
