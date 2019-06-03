@@ -9,7 +9,9 @@
 ### Tech Stack
 
 > Vue + Spring Boot + Spring Cloud + Docker + OAuth + ...
+
 > Continuous integration: Drone
+
 > Spring Cloud: Feign + Hystrix + Gateway
 
 ### Basic Idea 
