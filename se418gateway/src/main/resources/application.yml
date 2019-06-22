@@ -1,0 +1,28 @@
+server:
+  port: 7000
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:1111/eureka
+
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: host_route
+          uri: http://localhost:8050
+          predicates:
+            - Path=/a/**
+          filters:
+            - StripPrefix=1
+        - id: host_route
+          uri: http://localhost:8040
+          predicates:
+            - Path=/b/**
+          filters:
+            - StripPrefix=1
