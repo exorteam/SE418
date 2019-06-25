@@ -3,7 +3,7 @@ name: exort_se418
 
 steps:
 - name: build
-  image: maven:latest
+  image: maven:3.6.0
   commands:
   - cd ./se418ribbon
   - mvn clean package
