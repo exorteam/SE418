@@ -2,10 +2,16 @@ kind: pipeline
 name: exort_se418
 
 steps:
-- name: build_eureka
+- name: build
   image: maven:latest
   commands:
+  - cd ../se418ribbon
+  - mvn clean package
+  - cd ../se418gateway
+  - mvn clean package
   - cd ./eureka
+  - mvn clean package
+  - cd ../ladder
   - mvn clean package
 
 - name: scp_eureka
@@ -35,12 +41,6 @@ steps:
       - docker rm -f eureka
       - docker run -d --name=eureka -p 1111:1111 exort/eureka
 
-- name: build_ladder
-  image: maven:latest
-  commands:
-  - cd ./ladder
-  - mvn clean package
-
 - name: scp_ladder
   image: appleboy/drone-scp
   settings:
@@ -68,12 +68,6 @@ steps:
       - docker rm -f se418
       - docker run -d --name=se418 --link=eureka -p 8050:8050 exort/se418
 
-- name: build_ribbon
-  image: maven:latest
-  commands:
-  - cd ./se418ribbon
-  - mvn clean package
-
 - name: scp_ribbon
   image: appleboy/drone-scp
   settings:
@@ -100,12 +94,6 @@ steps:
       - docker build -t exort/ribbon .
       - docker rm -f ribbon
       - docker run -d --name=ribbon --link=eureka -p 8000:8000 exort/ribbon
-
-- name: build_gateway
-  image: maven:latest
-  commands:
-  - cd ./se418gateway
-  - mvn clean package
 
 - name: scp_gateway
   image: appleboy/drone-scp
