@@ -1,6 +1,5 @@
 
 HELP.md
-/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -34,3 +33,8 @@ HELP.md
 zuul+feign+hystrix+eruka/.idea/
 zuul+feign+hystrix+eruka/calculator/target/
 zuul+feign+hystrix+eruka/gateway/target/
+
+/ladder/target/
+/eureka/target/
+/se418ribbon/target/
+/se418gateway/target/

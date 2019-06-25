@@ -2,31 +2,26 @@ kind: pipeline
 name: exort_se418
 
 steps:
-- name: build
+- name: build_eureka
   image: maven:latest
   commands:
+  - cd ./eureka
   - mvn clean package
-  when:
-    event:
-    - push
 
-- name: scp
+- name: scp_eureka
   image: appleboy/drone-scp
   settings:
     host: 212.64.27.71 
     username: ubuntu
     password: 
         from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}
+    target: /home/ubuntu/deploy/${DRONE_REPO}/eureka
     source:
-    - target/se418-0.1.jar
+    - target/eureka-0.0.1-SNAPSHOT.jar
     - Dockerfile
     rm: true
-  #when:
-  #  branch:
-  #  - master
 
-- name: ssh
+- name: ssh_eureka
   image: appleboy/drone-ssh
   settings:
     host: 212.64.27.71 
@@ -34,11 +29,107 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
+      - ls -a
+      - docker build -t exort/eureka .
+      - docker rm -f eureka
+      - docker run -d --name=eureka -p 1111:1111 exort/eureka
+
+- name: build_ladder
+  image: maven:latest
+  commands:
+  - cd ./ladder
+  - mvn clean package
+
+- name: scp_ladder
+  image: appleboy/drone-scp
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    target: /home/ubuntu/deploy/${DRONE_REPO}/ladder
+    source:
+    - target/se418-0.1.jar
+    - Dockerfile
+    rm: true
+
+- name: ssh_ladder
+  image: appleboy/drone-ssh
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    script:
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
       - ls -a
       - docker build -t exort/se418 .
       - docker rm -f se418
-      - docker run -d --name se418 -p 8080:8080 exort/se418
-  #when:
-  #  branch:
-  #  - master
+      - docker run -d --name=se418 --link=eureka -p 8050:8050 exort/se418
+
+- name: build_ribbon
+  image: maven:latest
+  commands:
+  - cd ./se418ribbon
+  - mvn clean package
+
+- name: scp_ribbon
+  image: appleboy/drone-scp
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    target: /home/ubuntu/deploy/${DRONE_REPO}/ribbon
+    source:
+    - target/se418ribbon-0.0.1-SNAPSHOT.jar 
+    - Dockerfile
+    rm: true
+
+- name: ssh_ribbon
+  image: appleboy/drone-ssh
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    script:
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ribbon
+      - ls -a
+      - docker build -t exort/ribbon .
+      - docker rm -f ribbon
+      - docker run -d --name=ribbon --link=eureka -p 8000:8000 exort/ribbon
+
+- name: build_gateway
+  image: maven:latest
+  commands:
+  - cd ./se418gateway
+  - mvn clean package
+
+- name: scp_gateway
+  image: appleboy/drone-scp
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    target: /home/ubuntu/deploy/${DRONE_REPO}/gateway
+    source:
+    - target/se418gateway-0.0.1-SNAPSHOT.jar 
+    - Dockerfile
+    rm: true
+
+- name: ssh_gateway
+  image: appleboy/drone-ssh
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    script:
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/gateway
+      - ls -a
+      - docker build -t exort/gateway .
+      - docker rm -f gateway
+      - docker run -d --name=gateway --link=eureka -p 7000:7000 exort/gateway
