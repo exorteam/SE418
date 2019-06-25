@@ -5,11 +5,11 @@ steps:
 - name: build
   image: maven:latest
   commands:
-  - cd ../se418ribbon
+  - cd ./se418ribbon
   - mvn clean package
   - cd ../se418gateway
   - mvn clean package
-  - cd ./eureka
+  - cd ../eureka
   - mvn clean package
   - cd ../ladder
   - mvn clean package
