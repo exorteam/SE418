@@ -23,8 +23,8 @@ steps:
         from_secret: server_ci
     target: /home/ubuntu/deploy/${DRONE_REPO}/eureka
     source:
-    - target/eureka-0.0.1-SNAPSHOT.jar
-    - Dockerfile
+    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
+    - eureka/Dockerfile
     rm: true
 
 - name: ssh_eureka
@@ -35,7 +35,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka/eureka
       - ls -a
       - docker build -t exort/eureka .
       - docker rm -f eureka
@@ -50,8 +50,8 @@ steps:
         from_secret: server_ci
     target: /home/ubuntu/deploy/${DRONE_REPO}/ladder
     source:
-    - target/se418-0.1.jar
-    - Dockerfile
+    - ladder/target/se418-0.1.jar
+    - ladder/Dockerfile
     rm: true
 
 - name: ssh_ladder
@@ -62,7 +62,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder/ladder
       - ls -a
       - docker build -t exort/se418 .
       - docker rm -f se418
@@ -77,8 +77,8 @@ steps:
         from_secret: server_ci
     target: /home/ubuntu/deploy/${DRONE_REPO}/ribbon
     source:
-    - target/se418ribbon-0.0.1-SNAPSHOT.jar 
-    - Dockerfile
+    - ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
+    - ribbon/Dockerfile
     rm: true
 
 - name: ssh_ribbon
@@ -89,7 +89,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/ribbon
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ribbon/ribbon
       - ls -a
       - docker build -t exort/ribbon .
       - docker rm -f ribbon
@@ -104,8 +104,8 @@ steps:
         from_secret: server_ci
     target: /home/ubuntu/deploy/${DRONE_REPO}/gateway
     source:
-    - target/se418gateway-0.0.1-SNAPSHOT.jar 
-    - Dockerfile
+    - gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
+    - gateway/Dockerfile
     rm: true
 
 - name: ssh_gateway
@@ -116,7 +116,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/gateway
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/gateway/gateway
       - ls -a
       - docker build -t exort/gateway .
       - docker rm -f gateway
