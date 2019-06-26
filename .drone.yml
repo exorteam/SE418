@@ -2,6 +2,16 @@ kind: pipeline
 name: exort_se418
 
 steps:
+- name: restore-cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    restore: true
+    mount:
+      - /Users/ubuntu/.m2
+
 - name: build
   image: thomasf/drone-mvn
   commands:
@@ -14,101 +24,26 @@ steps:
   - cd ../ladder
   - mvn clean package
 
-- name: scp_eureka
+- name: scp
   image: appleboy/drone-scp
   settings:
     host: 212.64.27.71 
     username: ubuntu
     password: 
         from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}/eureka
+    target: /home/ubuntu/deploy/${DRONE_REPO}/
     source:
     - eureka/target/eureka-0.0.1-SNAPSHOT.jar
     - eureka/Dockerfile
-    rm: true
-
-- name: ssh_eureka
-  image: appleboy/drone-ssh
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka/eureka
-      - ls -a
-      - docker build -t exort/eureka .
-      - docker rm -f eureka
-      - docker run -d --name=eureka -p 1111:1111 exort/eureka
-
-- name: scp_ladder
-  image: appleboy/drone-scp
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}/ladder
-    source:
     - ladder/target/se418-0.1.jar
     - ladder/Dockerfile
-    rm: true
-
-- name: ssh_ladder
-  image: appleboy/drone-ssh
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder/ladder
-      - ls -a
-      - docker build -t exort/se418 .
-      - docker rm -f se418
-      - docker run -d --name=se418 --link=eureka -p 8050:8050 exort/se418
-
-- name: scp_ribbon
-  image: appleboy/drone-scp
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}/ribbon
-    source:
     - ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
     - ribbon/Dockerfile
-    rm: true
-
-- name: ssh_ribbon
-  image: appleboy/drone-ssh
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/ribbon/ribbon
-      - ls -a
-      - docker build -t exort/ribbon .
-      - docker rm -f ribbon
-      - docker run -d --name=ribbon --link=eureka -p 8000:8000 exort/ribbon
-
-- name: scp_gateway
-  image: appleboy/drone-scp
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}/gateway
-    source:
     - gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
     - gateway/Dockerfile
     rm: true
 
-- name: ssh_gateway
+- name: ssh
   image: appleboy/drone-ssh
   settings:
     host: 212.64.27.71 
@@ -116,8 +51,38 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/gateway/gateway
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
+      - ls -a
+      - docker build -t exort/eureka .
+      - docker rm -f eureka
+      - docker run -d --name=eureka -p 1111:1111 exort/eureka
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
+      - ls -a
+      - docker build -t exort/se418 .
+      - docker rm -f se418
+      - docker run -d --name=se418 --link=eureka -p 8050:8050 exort/se418
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ribbon
+      - ls -a
+      - docker build -t exort/ribbon .
+      - docker rm -f ribbon
+      - docker run -d --name=ribbon --link=eureka -p 8000:8000 exort/ribbon
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/gateway
       - ls -a
       - docker build -t exort/gateway .
       - docker rm -f gateway
       - docker run -d --name=gateway --link=eureka -p 7000:7000 exort/gateway
+
+- name: rebuild-cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    rebuild: true
+    mount:
+      - /Users/ubuntu/.m2
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache
