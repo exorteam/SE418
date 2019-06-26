@@ -83,6 +83,7 @@ steps:
       - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
       - docker build -t exort/se418 .
       #- docker run -d --name se418 -p 8050:8050 exort/se418
+      - cd /home/ubuntu/deploy/${DRONE_REPO}
       - docker-compose up -d
 
 volumes:
