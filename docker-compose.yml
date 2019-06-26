@@ -16,10 +16,10 @@ services:
         restart: always
         ports:
             - 8000:8000
-        links:
-            - eureka
-        #networks:
-        #    - springcloud
+        #links:
+        #    - eureka
+        networks:
+            - springcloud
 
     gateway:
         image: exort/gateway
@@ -27,11 +27,11 @@ services:
         restart: always
         ports:
             - 7000:7000
-        links:
-            - eureka
-            - ribbon
-        #networks:
-        #    - springcloud
+        #links:
+        #    - eureka
+        #    - ribbon
+        networks:
+            - springcloud
 
     ladder:
         image: exort/se418
@@ -39,14 +39,13 @@ services:
         restart: always
         ports:
             - 8050:8050
-        links:
-            - eureka
-            - ribbon
-            - gateway
-        #networks:
-        #    - springcloud
+        #links:
+        #    - eureka
+        #    - ribbon
+        #    - gateway
+        networks:
+            - springcloud
 
-#networks:
-#    default:
-#        external:
-#            name: springcloud
+networks:
+    springcloud:
+        driver: overlay
