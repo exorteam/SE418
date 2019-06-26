@@ -16,7 +16,7 @@ steps:
   image: thomasf/drone-mvn
   volumes:
   - name: cache
-    path: ./.m2
+    path: /root/.m2
   commands:
   - cd ./se418ribbon
   - mvn clean package
