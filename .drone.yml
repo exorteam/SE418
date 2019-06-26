@@ -11,7 +11,7 @@ steps:
   settings:
     restore: true
     mount:
-      - ./repo
+      - /home/ubuntu/.m2
 
 - name: build
   image: thomasf/drone-mvn
@@ -33,7 +33,7 @@ steps:
   settings:
     rebuild: true
     mount:
-      - ./repo
+      - /home/ubuntu/.m2
 
 - name: scp
   image: appleboy/drone-scp
