@@ -2,35 +2,51 @@ version: "2"
 services:
     eureka:
         image: exort/eureka
+        container_name: eureka
         hostname: eureka
         restart: always
         ports:
             - 1111:1111
+        networks:
+            - springcloud
 
     ribbon:
         image: exort/ribbon
+        container_name: ribbon
         restart: always
         ports:
             - 8000:8000
         links:
-            - "eureka"
+            - eureka
+        networks:
+            - springcloud
 
     gateway:
         image: exort/gateway
+        container_name: gateway
         restart: always
         ports:
             - 7000:7000
         links:
-            - "eureka"
-            - "ribbon"
+            - eureka
+            - ribbon
+        networks:
+            - springcloud
 
     ladder:
         image: exort/se418
+        container_name: ladder
         restart: always
         ports:
             - 8050:8050
         links:
-            - "eureka"
-            - "ribbon"
-            - "gateway"
+            - eureka
+            - ribbon
+            - gateway
+        networks:
+            - springcloud
 
+networks:
+    default:
+        external:
+            name: springcloud
