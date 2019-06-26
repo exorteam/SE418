@@ -2,18 +2,21 @@ kind: pipeline
 name: exort_se418
 
 steps:
-- name: restore-cache
-  image: drillster/drone-volume-cache
-  volumes:
-  - name: cache
-    path: /cache
-  settings:
-    restore: true
-    mount:
-      - /home/ubuntu/.m2
+#- name: restore-cache
+#  image: drillster/drone-volume-cache
+#  volumes:
+#  - name: cache
+#    path: /cache
+#  settings:
+#    restore: true
+#    mount:
+#      - /home/ubuntu/.m2
 
 - name: build
   image: thomasf/drone-mvn
+  volumes:
+  - name: cache
+    path: ./.m2
   commands:
   - cd ./se418ribbon
   - mvn clean package
@@ -24,15 +27,15 @@ steps:
   - cd ../ladder
   - mvn clean package
 
-- name: rebuild-cache
-  image: drillster/drone-volume-cache
-  volumes:
-  - name: cache
-    path: /cache
-  settings:
-    rebuild: true
-    mount:
-      - /home/ubuntu/.m2
+#- name: rebuild-cache
+#  image: drillster/drone-volume-cache
+#  volumes:
+#  - name: cache
+#    path: /cache
+#  settings:
+#    rebuild: true
+#    mount:
+#      - /home/ubuntu/.m2
 
 - name: scp
   image: appleboy/drone-scp
@@ -68,19 +71,15 @@ steps:
       - docker network rm springcloud
       - docker network create springcloud
       - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
-      - ls -a
       - docker build -t exort/eureka .
       - docker run -d --name eureka --net springcloud -p 1111:1111 exort/eureka
       - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
-      - ls -a
       - docker build -t exort/se418 .
       - docker run -d --name se418 --net springcloud -p 8050:8050 exort/se418
       - cd /home/ubuntu/deploy/${DRONE_REPO}/ribbon
-      - ls -a
       - docker build -t exort/ribbon .
       - docker run -d --name ribbon --net springcloud -p 8000:8000 exort/ribbon
       - cd /home/ubuntu/deploy/${DRONE_REPO}/gateway
-      - ls -a
       - docker build -t exort/gateway .
       - docker run -d --name gateway --net springcloud -p 7000:7000 exort/gateway
 
