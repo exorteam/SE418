@@ -14,3 +14,4 @@ WORKDIR /app/gateway
 
 ENTRYPOINT ["java","-jar","se418gateway-0.0.1-SNAPSHOT.jar"]
 
+EXPOSE 7000

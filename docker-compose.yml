@@ -1,0 +1,30 @@
+eureka:
+    image: exort/eureka
+    hostname: eureka
+    ports:
+        - "1111:1111"
+
+ribbon:
+    image: exort/ribbon
+    ports:
+        - "8000:8000"
+    links:
+        - "eureka"
+
+gateway:
+    image: exort/gateway
+    ports:
+        - "7000:7000"
+    links:
+        - "eureka"
+        - "ribbon"
+
+ladder:
+    image: exort/se418
+    ports:
+        - "8050:8050"
+    links:
+        - "eureka"
+        - "ribbon"
+        - "gateway"
+
