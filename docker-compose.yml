@@ -7,8 +7,8 @@ services:
         restart: always
         ports:
             - 1111:1111
-        networks:
-            - springcloud
+        #networks:
+        #    - springcloud
 
     ribbon:
         image: exort/ribbon
@@ -18,8 +18,8 @@ services:
             - 8000:8000
         links:
             - eureka
-        networks:
-            - springcloud
+        #networks:
+        #    - springcloud
 
     gateway:
         image: exort/gateway
@@ -30,8 +30,8 @@ services:
         links:
             - eureka
             - ribbon
-        networks:
-            - springcloud
+        #networks:
+        #    - springcloud
 
     ladder:
         image: exort/se418
@@ -43,10 +43,10 @@ services:
             - eureka
             - ribbon
             - gateway
-        networks:
-            - springcloud
+        #networks:
+        #    - springcloud
 
-networks:
-    default:
-        external:
-            name: springcloud
+#networks:
+#    default:
+#        external:
+#            name: springcloud
