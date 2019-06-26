@@ -15,13 +15,13 @@ spring:
     gateway:
       routes:
         - id: host_route
-          uri: http://localhost:8050
+          uri: http://ladder:8050
           predicates:
             - Path=/a/**
           filters:
             - StripPrefix=1
         - id: host_route
-          uri: http://localhost:8040
+          uri: http://ladder:8040
           predicates:
             - Path=/b/**
           filters:
