@@ -2,13 +2,10 @@ package exort.se418gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.gateway.filter.factory.StripPrefixGatewayFilterFactory;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @SpringBootApplication
 public class Se418gatewayApplication {
 
@@ -19,7 +16,7 @@ public class Se418gatewayApplication {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-			.route("ladder",r -> r.path("/ladder/**")
+			.route("ladder",r -> r.path("/ladder/dog/cat")
 					.uri("http://ladder:8050/"))
 			.build();
         //StripPrefixGatewayFilterFactory.Config config = new StripPrefixGatewayFilterFactory.Config();
