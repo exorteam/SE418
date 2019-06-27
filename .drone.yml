@@ -86,6 +86,7 @@ steps:
       #- docker run -d --name se418 -p 8050:8050 exort/se418
       - cd /home/ubuntu/deploy/${DRONE_REPO}
       #- docker-compose up -d
+      - docker swarm init
       - docker stack deploy -c docker-compose.yml eurekacluster
 
 volumes:

@@ -2,7 +2,7 @@ version: "3"
 services:
     eureka:
         image: exort/eureka
-        container_name: eureka
+        #container_name: eureka
         hostname: eureka
         restart: always
         ports:
@@ -12,7 +12,7 @@ services:
 
     ribbon:
         image: exort/ribbon
-        container_name: ribbon
+        #container_name: ribbon
         restart: always
         ports:
             - 8000:8000
@@ -23,7 +23,7 @@ services:
 
     gateway:
         image: exort/gateway
-        container_name: gateway
+        #container_name: gateway
         restart: always
         ports:
             - 7000:7000
@@ -35,7 +35,7 @@ services:
 
     ladder:
         image: exort/se418
-        container_name: ladder
+        #container_name: ladder
         restart: always
         ports:
             - 8050:8050
