@@ -14,8 +14,8 @@ services:
         image: exort/ribbon
         container_name: ribbon
         restart: always
-        environment:
-            - spring.profiles.active=ribbon
+        #environment:
+        #    - spring.profiles.active=ribbon
         ports:
             - 8000:8000
         links:
@@ -27,8 +27,8 @@ services:
         image: exort/gateway
         container_name: gateway
         restart: always
-        environment:
-            - spring.profiles.active=gateway
+        #environment:
+        #    - spring.profiles.active=gateway
         ports:
             - 7000:7000
         links:
@@ -43,8 +43,8 @@ services:
         restart: always
         ports:
             - 8050:8050
-        environment:
-            - spring.profiles.active=ladder
+        #environment:
+        #    - spring.profiles.active=ladder
         links:
             - eureka
             - ribbon
