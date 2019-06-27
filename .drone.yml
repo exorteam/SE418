@@ -17,25 +17,25 @@ steps:
   - cd ../ladder
   - mvn clean package
 
-- name: scp
-  image: appleboy/drone-scp
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}/
-    source:
-    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
-    - eureka/Dockerfile
-    - ladder/target/se418-0.1.jar
-    - ladder/Dockerfile
-    - se418ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
-    - se418ribbon/Dockerfile
-    - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
-    - se418gateway/Dockerfile
-    - docker-compose.yml
-    rm: true
+#- name: scp
+#  image: appleboy/drone-scp
+#  settings:
+#    host: 212.64.27.71 
+#    username: ubuntu
+#    password: 
+#        from_secret: server_ci
+#    target: /home/ubuntu/deploy/${DRONE_REPO}/
+#    source:
+#    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
+#    - eureka/Dockerfile
+#    - ladder/target/se418-0.1.jar
+#    - ladder/Dockerfile
+#    - se418ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
+#    - se418ribbon/Dockerfile
+#    - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
+#    - se418gateway/Dockerfile
+#    - docker-compose.yml
+#    rm: true
 
 - name: ssh
   image: appleboy/drone-ssh
