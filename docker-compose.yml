@@ -55,7 +55,7 @@ services:
     ladder2:
         image: exort/ladder
         environment:
-            - spring.profiles.active=ladder2
+            - spring.profiles.active=ladder
         networks:
             - springcloud
 

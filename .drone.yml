@@ -7,6 +7,8 @@ steps:
   volumes:
   - name: cache
     path: /root/.m2
+  - name: mvn_build
+    path: /drone/src
   commands:
   - cd ./feign
   - mvn clean package
@@ -19,25 +21,25 @@ steps:
   #- cd ..
   #- pwd
 
-- name: scp
-  image: appleboy/drone-scp
-  settings:
-    host: 212.64.27.71 
-    username: ubuntu
-    password: 
-        from_secret: server_ci
-    target: /home/ubuntu/deploy/${DRONE_REPO}/
-    source:
-    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
-    - eureka/Dockerfile
-    - feign/target/se418-0.1.jar
-    - feign/Dockerfile
-    - ladder/target/ladder-0.0.1-SNAPSHOT.jar 
-    - ladder/Dockerfile
-    - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
-    - se418gateway/Dockerfile
-    - docker-compose.yml
-    rm: true
+#- name: scp
+#  image: appleboy/drone-scp
+#  settings:
+#    host: 212.64.27.71 
+#    username: ubuntu
+#    password: 
+#        from_secret: server_ci
+#    target: /home/ubuntu/deploy/${DRONE_REPO}/
+#    source:
+#    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
+#    - eureka/Dockerfile
+#    - feign/target/se418-0.1.jar
+#    - feign/Dockerfile
+#    - ladder/target/ladder-0.0.1-SNAPSHOT.jar 
+#    - ladder/Dockerfile
+#    - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
+#    - se418gateway/Dockerfile
+#    - docker-compose.yml
+#    rm: true
 
 - name: ssh
   image: appleboy/drone-ssh
@@ -47,7 +49,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      #- docker stack rm eurekacluster
+      - docker stack rm eurekacluster
       #- docker rm -f se418
       #- docker rm -f gateway
       #- docker rm -f ribbon
@@ -71,10 +73,14 @@ steps:
       #- docker-compose up -d
       #- docker swarm leave
       #- docker swarm init
-      #- docker network create --driver overlay springcloud
+      - docker network create --driver overlay eurekacluster_springcloud
       - docker stack deploy -c docker-compose.yml eurekacluster
 
 volumes:
   - name: cache
     host:
       path: /home/ubuntu/repo
+  - name: mvn_build
+    host:
+      path: /home/ubuntu/deploy/${DRONE_REPO}
+
