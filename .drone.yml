@@ -16,8 +16,8 @@ steps:
   - mvn clean package
   - cd ../ladder
   - mvn clean package
-  - cd ..
-  - pwd
+  #- cd ..
+  #- pwd
 
 - name: scp
   image: appleboy/drone-scp
