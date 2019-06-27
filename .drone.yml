@@ -47,7 +47,7 @@ steps:
     password: 
         from_secret: server_ci
     script:
-      #- docker stack rm eurekacluster
+      - docker stack rm eurekacluster
       #- docker rm -f se418
       #- docker rm -f gateway
       #- docker rm -f ribbon
@@ -68,10 +68,10 @@ steps:
       - docker build -t exort/se418 .
       #- docker run -d --name se418 -p 8050:8050 exort/se418
       - cd /home/ubuntu/deploy/${DRONE_REPO}
-      - docker-compose up -d
+      #- docker-compose up -d
       #- docker swarm leave
       #- docker swarm init
-      #- docker stack deploy -c docker-compose.yml eurekacluster
+      - docker stack deploy -c docker-compose.yml eurekacluster
 
 volumes:
   - name: cache

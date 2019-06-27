@@ -1,10 +1,10 @@
-version: "2"
+version: "3"
 services:
     eureka:
         image: exort/eureka
-        container_name: eureka
+        #container_name: eureka
         hostname: eureka
-        restart: always
+        #restart: always
         ports:
             - 1111:1111
         #networks:
@@ -12,10 +12,10 @@ services:
 
     ribbon:
         image: exort/ribbon
-        container_name: ribbon
-        restart: always
-        #environment:
-        #    - spring.profiles.active=ribbon
+        #container_name: ribbon
+        #restart: always
+        environment:
+            - spring.profiles.active=ribbon
         ports:
             - 8000:8000
         links:
@@ -25,10 +25,10 @@ services:
 
     gateway:
         image: exort/gateway
-        container_name: gateway
-        restart: always
-        #environment:
-        #    - spring.profiles.active=gateway
+        #container_name: gateway
+        #restart: always
+        environment:
+            - spring.profiles.active=gateway
         ports:
             - 7000:7000
         links:
@@ -39,12 +39,12 @@ services:
 
     ladder:
         image: exort/se418
-        container_name: ladder
-        restart: always
+        #container_name: ladder
+        #restart: always
         ports:
             - 8050:8050
-        #environment:
-        #    - spring.profiles.active=ladder
+        environment:
+            - spring.profiles.active=ladder
         links:
             - eureka
             - ribbon
