@@ -6,11 +6,16 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://eureka:1111/eureka
+  instance:
+    hostname: gateway
+    perfer-ip-address: true
 
 
-#spring:
-#  application:
-#    name: gateway
+spring:
+  application:
+    name: gateway
+  profiles: gateway
+
 #  cloud:
 #    gateway:
 #      routes:
