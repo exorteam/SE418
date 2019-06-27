@@ -82,5 +82,4 @@ volumes:
       path: /home/ubuntu/repo
   - name: mvn_build
     host:
-      path: /home/ubuntu/deploy/${DRONE_REPO}
-
+      path: /home/ubuntu/deploy/exorteam/SE418
