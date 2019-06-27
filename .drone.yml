@@ -7,8 +7,8 @@ steps:
   volumes:
   - name: cache
     path: /root/.m2
-  - name: mvn_build
-    path: /drone/src
+  #- name: mvn_build
+  #  path: /drone/src
   commands:
   - cd ./feign
   - mvn clean package
@@ -18,8 +18,8 @@ steps:
   - mvn clean package
   - cd ../ladder
   - mvn clean package
-  #- cd ..
-  #- pwd
+  - cd ..
+  - pwd
 
 #- name: scp
 #  image: appleboy/drone-scp
