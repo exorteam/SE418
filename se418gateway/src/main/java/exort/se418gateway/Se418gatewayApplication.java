@@ -19,7 +19,7 @@ public class Se418gatewayApplication {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-			.route("ladder",r -> r.path("/")
+			.route("ladder",r -> r.path("/ladder/**")
 					.uri("http://ladder:8050/"))
 			.build();
         //StripPrefixGatewayFilterFactory.Config config = new StripPrefixGatewayFilterFactory.Config();
