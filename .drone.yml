@@ -71,6 +71,7 @@ steps:
       #- docker-compose up -d
       #- docker swarm leave
       #- docker swarm init
+      - docker network create --driver overlay springcloud
       - docker stack deploy -c docker-compose.yml eurekacluster
 
 volumes:

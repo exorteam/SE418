@@ -41,14 +41,21 @@ services:
         image: exort/ladder
         #container_name: ladder
         #restart: always
-        ports:
-            - 8010:8010
+        #ports:
+        #    - 8010:8010
         environment:
             - spring.profiles.active=ladder
         #links:
         #    - eureka
         #    - ribbon
         #    - gateway
+        networks:
+            - springcloud
+
+    ladder2:
+        image: exort/ladder
+        environment:
+            - spring.profiles.active=ladder2
         networks:
             - springcloud
 
