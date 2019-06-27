@@ -21,7 +21,7 @@ public class Se418gatewayApplication {
         StripPrefixGatewayFilterFactory.Config config = new StripPrefixGatewayFilterFactory.Config();
         config.setParts(1);
         return builder.routes()
-                .route("host_route", r -> r.path("/a/**").filters(f -> f.stripPrefix(1)).uri("http://localhost:8050"))
+                .route("host_route", r -> r.path("/a/**").filters(f -> f.stripPrefix(1)).uri("http://ladder:8050"))
                 .route("host_route", r -> r.path("/b/**").filters(f -> f.stripPrefix(1)).uri("http://localhost:8040"))
                 .build();
     }
