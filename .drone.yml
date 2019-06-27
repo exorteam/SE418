@@ -55,19 +55,19 @@ steps:
       #- docker network rm springcloud
       #- docker network create springcloud
       - pwd
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
+      - cd /drone/src/eureka
       - docker build -t exort/eureka .
       #- docker run -d --name eureka -p 1111:1111 exort/eureka
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/se418ribbon
+      - cd /drone/src/se418ribbon
       - docker build -t exort/ribbon .
       #- docker run -d --name ribbon --link eureka:eureka -p 8000:8000 exort/ribbon
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/se418gateway
+      - cd /drone/src/se418gateway
       - docker build -t exort/gateway .
       #- docker run -d --name gateway --link eureka:eureka -p 7000:7000 exort/gateway
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
+      - cd /drone/src/ladder
       - docker build -t exort/se418 .
       #- docker run -d --name se418 -p 8050:8050 exort/se418
-      - cd /home/ubuntu/deploy/${DRONE_REPO}
+      - cd /drone/src
       - docker-compose up -d
       #- docker swarm leave
       #- docker swarm init
