@@ -1,5 +1,6 @@
 package exort.se418.controller;
 
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +17,11 @@ public class FeignController{
 
 	@GetMapping("/")
 	public String homepage(){
-		return "Home Page";
+		return "This is feign home page";
 	}
 
 	@GetMapping("/ladder")
-	public String generateLadder(@RequestParam String start,@RequestParam String end){
+	public List<String> generateLadder(@RequestParam String start,@RequestParam String end){
 		return service.generateLadder(start,end);
 	}
 }
