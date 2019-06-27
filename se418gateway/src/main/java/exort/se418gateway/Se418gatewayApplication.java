@@ -18,11 +18,15 @@ public class Se418gatewayApplication {
 
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-        StripPrefixGatewayFilterFactory.Config config = new StripPrefixGatewayFilterFactory.Config();
-        config.setParts(1);
-        return builder.routes()
-                .route("host_route", r -> r.path("/a/**").filters(f -> f.stripPrefix(1)).uri("http://ladder:8050"))
-                .route("host_route", r -> r.path("/b/**").filters(f -> f.stripPrefix(1)).uri("http://localhost:8040"))
-                .build();
+		return builder.routes()
+			.route("ladder",r -> r.path("/ladder")
+					.uri("https://ladder:8050/"))
+			.build();
+        //StripPrefixGatewayFilterFactory.Config config = new StripPrefixGatewayFilterFactory.Config();
+        //config.setParts(1);
+        //return builder.routes()
+        //        .route("host_route", r -> r.path("/a/**").filters(f -> f.stripPrefix(1)).uri("http://ladder:8050"))
+        //        .route("host_route", r -> r.path("/b/**").filters(f -> f.stripPrefix(1)).uri("http://localhost:8040"))
+        //        .build();
     }
 }

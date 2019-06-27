@@ -8,21 +8,21 @@ eureka:
       defaultZone: http://eureka:1111/eureka
 
 
-spring:
-  application:
-    name: gateway
-  cloud:
-    gateway:
-      routes:
-        - id: host_route
-          uri: http://ladder:8050
-          predicates:
-            - Path=/a/**
-          filters:
-            - StripPrefix=1
-        - id: host_route
-          uri: http://ladder:8040
-          predicates:
-            - Path=/b/**
-          filters:
-            - StripPrefix=1
+#spring:
+#  application:
+#    name: gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: host_route
+#          uri: http://ladder:8050
+#          predicates:
+#            - Path=/a/**
+#          filters:
+#            - StripPrefix=1
+#        - id: host_route
+#          uri: http://ladder:8040
+#          predicates:
+#            - Path=/b/**
+#          filters:
+#            - StripPrefix=1
