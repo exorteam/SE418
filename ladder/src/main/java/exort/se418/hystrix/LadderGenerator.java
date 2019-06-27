@@ -14,7 +14,7 @@ public class LadderGenerator extends HystrixCommand<String> {
 		super(Setter
 				.withGroupKey(HystrixCommandGroupKey.Factory.asKey("ladder"))
 				.andCommandPropertiesDefaults(
-					HystrixCommandProperties.Setter().withExecutionTimeoutInMilliseconds(20000)));
+					HystrixCommandProperties.Setter().withExecutionTimeoutInMilliseconds(100000)));
 		this.begin = begin;
 		this.end = end;
 	}
@@ -26,6 +26,6 @@ public class LadderGenerator extends HystrixCommand<String> {
 
 	@Override
 	protected String getFallback(){
-		return "Generation time beyond 20s";
+		return "Generation time beyond 100s";
 	}
 }

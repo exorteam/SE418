@@ -14,3 +14,4 @@ WORKDIR /app/se418
 
 ENTRYPOINT ["java","-jar","se418-0.1.jar"]
 
+EXPOSE 8050

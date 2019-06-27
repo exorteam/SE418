@@ -14,3 +14,4 @@ WORKDIR /app/ribbon
 
 ENTRYPOINT ["java","-jar","se418ribbon-0.0.1-SNAPSHOT.jar"]
 
+EXPOSE 8000

@@ -5,24 +5,29 @@ eureka:
   client:
     register-with-eureka: true
     service-url:
-      defaultZone: http://localhost:1111/eureka
+      defaultZone: http://eureka:1111/eureka
+  instance:
+    hostname: gateway
+    perfer-ip-address: true
 
 
 spring:
   application:
     name: gateway
-  cloud:
-    gateway:
-      routes:
-        - id: host_route
-          uri: http://localhost:8050
-          predicates:
-            - Path=/a/**
-          filters:
-            - StripPrefix=1
-        - id: host_route
-          uri: http://localhost:8040
-          predicates:
-            - Path=/b/**
-          filters:
-            - StripPrefix=1
+  profiles: gateway
+
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: host_route
+#          uri: http://ladder:8050
+#          predicates:
+#            - Path=/a/**
+#          filters:
+#            - StripPrefix=1
+#        - id: host_route
+#          uri: http://ladder:8040
+#          predicates:
+#            - Path=/b/**
+#          filters:
+#            - StripPrefix=1
