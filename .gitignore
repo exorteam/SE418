@@ -39,3 +39,4 @@ zuul+feign+hystrix+eruka/gateway/target/
 /eureka/target/
 /se418ribbon/target/
 /se418gateway/target/
+oauth/target/
