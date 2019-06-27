@@ -39,6 +39,8 @@ services:
         restart: always
         ports:
             - 8050:8050
+        environment:
+            - spring.profiles.active=ladder
         #links:
         #    - eureka
         #    - ribbon
