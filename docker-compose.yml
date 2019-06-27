@@ -10,14 +10,14 @@ services:
         networks:
             - springcloud
 
-    ribbon:
-        image: exort/ribbon
+    feign:
+        image: exort/feign
         #container_name: ribbon
         #restart: always
         environment:
-            - spring.profiles.active=ribbon
+            - spring.profiles.active=feign
         ports:
-            - 8000:8000
+            - 8050:8050
         #links:
         #    - eureka
         networks:
@@ -38,11 +38,11 @@ services:
             - springcloud
 
     ladder:
-        image: exort/se418
+        image: exort/ladder
         #container_name: ladder
         #restart: always
         ports:
-            - 8050:8050
+            - 8010:8010
         environment:
             - spring.profiles.active=ladder
         #links:
