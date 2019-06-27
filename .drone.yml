@@ -76,4 +76,4 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /tmp/cache
+      path: /home/ubuntu/repo
