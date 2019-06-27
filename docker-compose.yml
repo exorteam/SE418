@@ -7,8 +7,8 @@ services:
         #restart: always
         ports:
             - 1111:1111
-        networks:
-            - springcloud
+        #networks:
+        #    - springcloud
 
     ribbon:
         image: exort/ribbon
@@ -18,10 +18,10 @@ services:
             - spring.profiles.active=ribbon
         ports:
             - 8000:8000
-        #links:
-        #    - eureka
-        networks:
-            - springcloud
+        links:
+            - eureka
+        #networks:
+        #    - springcloud
 
     gateway:
         image: exort/gateway
@@ -31,11 +31,11 @@ services:
             - spring.profiles.active=gateway
         ports:
             - 7000:7000
-        #links:
-        #    - eureka
-        #    - ribbon
-        networks:
-            - springcloud
+        links:
+            - eureka
+            - ribbon
+        #networks:
+        #    - springcloud
 
     ladder:
         image: exort/se418
@@ -45,13 +45,13 @@ services:
             - 8050:8050
         environment:
             - spring.profiles.active=ladder
-        #links:
-        #    - eureka
-        #    - ribbon
-        #    - gateway
-        networks:
-            - springcloud
+        links:
+            - eureka
+            - ribbon
+            - gateway
+#        networks:
+#            - springcloud
 
-networks:
-    springcloud:
-        driver: overlay
+#networks:
+#    springcloud:
+#        driver: overlay
