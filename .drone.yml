@@ -54,7 +54,7 @@ steps:
       #- docker rm -f eureka
       #- docker network rm springcloud
       #- docker network create springcloud
-      - pwd
+      #- pwd
       - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
       - docker build -t exort/eureka .
       #- docker run -d --name eureka -p 1111:1111 exort/eureka
