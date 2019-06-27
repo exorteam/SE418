@@ -19,25 +19,25 @@ steps:
   - cd ..
   - pwd
 
-#- name: scp
-#  image: appleboy/drone-scp
-#  settings:
-#    host: 212.64.27.71 
-#    username: ubuntu
-#    password: 
-#        from_secret: server_ci
-#    target: /home/ubuntu/deploy/${DRONE_REPO}/
-#    source:
-#    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
-#    - eureka/Dockerfile
-#    - ladder/target/se418-0.1.jar
-#    - ladder/Dockerfile
-#    - se418ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
-#    - se418ribbon/Dockerfile
-#    - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
-#    - se418gateway/Dockerfile
-#    - docker-compose.yml
-#    rm: true
+- name: scp
+  image: appleboy/drone-scp
+  settings:
+    host: 212.64.27.71 
+    username: ubuntu
+    password: 
+        from_secret: server_ci
+    target: /home/ubuntu/deploy/${DRONE_REPO}/
+    source:
+    - eureka/target/eureka-0.0.1-SNAPSHOT.jar
+    - eureka/Dockerfile
+    - ladder/target/se418-0.1.jar
+    - ladder/Dockerfile
+    - se418ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
+    - se418ribbon/Dockerfile
+    - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
+    - se418gateway/Dockerfile
+    - docker-compose.yml
+    rm: true
 
 - name: ssh
   image: appleboy/drone-ssh
@@ -55,19 +55,19 @@ steps:
       #- docker network rm springcloud
       #- docker network create springcloud
       - pwd
-      - cd /drone/src/eureka
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
       - docker build -t exort/eureka .
       #- docker run -d --name eureka -p 1111:1111 exort/eureka
-      - cd /drone/src/se418ribbon
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/se418ribbon
       - docker build -t exort/ribbon .
       #- docker run -d --name ribbon --link eureka:eureka -p 8000:8000 exort/ribbon
-      - cd /drone/src/se418gateway
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/se418gateway
       - docker build -t exort/gateway .
       #- docker run -d --name gateway --link eureka:eureka -p 7000:7000 exort/gateway
-      - cd /drone/src/ladder
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
       - docker build -t exort/se418 .
       #- docker run -d --name se418 -p 8050:8050 exort/se418
-      - cd /drone/src
+      - cd /home/ubuntu/deploy/${DRONE_REPO}
       - docker-compose up -d
       #- docker swarm leave
       #- docker swarm init
