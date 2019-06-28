@@ -1,4 +1,4 @@
-package exort.se418.component;
+package exort.ladder;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

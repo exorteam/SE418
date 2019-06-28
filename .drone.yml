@@ -17,6 +17,8 @@ steps:
   - mvn clean package
   - cd ../eureka
   - mvn clean package
+  - cd ../oauth
+  - mvn clean package
   - cd ../ladder
   - mvn clean package
   #- cd ..
@@ -39,6 +41,8 @@ steps:
     - ladder/Dockerfile
     - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
     - se418gateway/Dockerfile
+    - oauth/target/boot-security-oauth2-0.0.1-SNAPSHOT.jar
+    - oauth/Dockerfile
     - docker-compose.yml
     rm: true
 
@@ -69,6 +73,8 @@ steps:
       #- docker run -d --name gateway --link eureka:eureka -p 7000:7000 exort/gateway
       - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
       - docker build -t exort/ladder .
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/oauth
+      - docker build -t exort/oauth .
       #- docker run -d --name se418 -p 8050:8050 exort/se418
       - cd /home/ubuntu/deploy/${DRONE_REPO}
       #- docker-compose up -d
