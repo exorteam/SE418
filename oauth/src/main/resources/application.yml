@@ -1,2 +1,17 @@
 server:
     port: 9800
+   
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka:1111/eureka
+  instance:
+    hostname: oauth
+    perfer-ip-address: true
+
+
+spring:
+  application:
+    name: oauth
+  profiles: oauth
