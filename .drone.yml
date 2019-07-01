@@ -1,14 +1,17 @@
 kind: pipeline
 name: exort_se418
 
+
 steps:
 - name: build
   image: thomasf/drone-mvn
   volumes:
   - name: cache
     path: /root/.m2
+  #- name: mvn_build
+  #  path: /drone/src
   commands:
-  - cd ./se418ribbon
+  - cd ./feign
   - mvn clean package
   - cd ../se418gateway
   - mvn clean package
@@ -30,10 +33,10 @@ steps:
     source:
     - eureka/target/eureka-0.0.1-SNAPSHOT.jar
     - eureka/Dockerfile
-    - ladder/target/se418-0.1.jar
+    - feign/target/se418-0.1.jar
+    - feign/Dockerfile
+    - ladder/target/ladder-0.0.1-SNAPSHOT.jar 
     - ladder/Dockerfile
-    - se418ribbon/target/se418ribbon-0.0.1-SNAPSHOT.jar 
-    - se418ribbon/Dockerfile
     - se418gateway/target/se418gateway-0.0.1-SNAPSHOT.jar 
     - se418gateway/Dockerfile
     - docker-compose.yml
@@ -58,22 +61,26 @@ steps:
       - cd /home/ubuntu/deploy/${DRONE_REPO}/eureka
       - docker build -t exort/eureka .
       #- docker run -d --name eureka -p 1111:1111 exort/eureka
-      - cd /home/ubuntu/deploy/${DRONE_REPO}/se418ribbon
-      - docker build -t exort/ribbon .
+      - cd /home/ubuntu/deploy/${DRONE_REPO}/feign
+      - docker build -t exort/feign .
       #- docker run -d --name ribbon --link eureka:eureka -p 8000:8000 exort/ribbon
       - cd /home/ubuntu/deploy/${DRONE_REPO}/se418gateway
       - docker build -t exort/gateway .
       #- docker run -d --name gateway --link eureka:eureka -p 7000:7000 exort/gateway
       - cd /home/ubuntu/deploy/${DRONE_REPO}/ladder
-      - docker build -t exort/se418 .
+      - docker build -t exort/ladder .
       #- docker run -d --name se418 -p 8050:8050 exort/se418
       - cd /home/ubuntu/deploy/${DRONE_REPO}
       #- docker-compose up -d
       #- docker swarm leave
       #- docker swarm init
+      #- docker network create --driver overlay eurekacluster_springcloud
       - docker stack deploy -c docker-compose.yml eurekacluster
 
 volumes:
   - name: cache
     host:
       path: /home/ubuntu/repo
+  - name: mvn_build
+    host:
+      path: /home/ubuntu/deploy/exorteam/SE418

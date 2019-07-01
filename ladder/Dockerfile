@@ -6,12 +6,12 @@ ENV LANG en_US.UTF-8
 
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
-RUN mkdir -p /app/se418
+RUN mkdir -p /app/ladder
 
-COPY /target/se418-0.1.jar /app/se418
+COPY /target/ladder-0.0.1-SNAPSHOT.jar /app/ladder
 
-WORKDIR /app/se418
+WORKDIR /app/ladder
 
-ENTRYPOINT ["java","-jar","se418-0.1.jar"]
+ENTRYPOINT ["java","-jar","ladder-0.0.1-SNAPSHOT.jar"]
 
-EXPOSE 8050
+EXPOSE 8010

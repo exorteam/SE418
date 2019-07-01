@@ -35,6 +35,8 @@ zuul+feign+hystrix+eruka/calculator/target/
 zuul+feign+hystrix+eruka/gateway/target/
 
 /ladder/target/
+/feign/target/
 /eureka/target/
 /se418ribbon/target/
 /se418gateway/target/
+oauth/target/
