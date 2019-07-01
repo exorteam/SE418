@@ -37,6 +37,18 @@ services:
         networks:
             - springcloud
 
+    oauth:
+        image: exort/oauth
+        environment:
+            - spring.profiles.active=oauth
+        ports:
+            - 9800:9800
+        #links:
+        #    - eureka
+        #    - ribbon
+        networks:
+            - springcloud
+
     ladder:
         image: exort/ladder
         #container_name: ladder

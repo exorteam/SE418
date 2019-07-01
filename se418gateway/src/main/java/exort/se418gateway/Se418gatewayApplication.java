@@ -18,6 +18,8 @@ public class Se418gatewayApplication {
 		return builder.routes()
 			.route("ladder",r -> r.path("/ladder/**")
 					.uri("http://feign:8050/"))
+			.route("auth",r -> r.path("/oauth/**")
+					.uri("http://oauth:9800/"))
 			.build();
         //StripPrefixGatewayFilterFactory.Config config = new StripPrefixGatewayFilterFactory.Config();
         //config.setParts(1);
